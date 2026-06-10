@@ -6,6 +6,8 @@ Proyecto realizado en el marco del **Máster de Big Data de la UNED (2025)**, ce
 
 En este trabajo, se define como éxito comercial superar **1 millón de ventas globales** (`total_sales >= 1.0`).
 
+**[Ver la memoria completa del proyecto](https://ivanaraque.github.io/analisis-prediccion-videojuegos/memoria/Ivan_Araque_Lopez_Memoria.html)** — informe redactado en RMarkdown con el desarrollo completo del análisis.
+
 ## Objetivo del proyecto
 
 El objetivo principal es desarrollar un modelo de clasificación que permita predecir el éxito potencial de un videojuego a partir de variables conocidas como:
@@ -59,6 +61,10 @@ Se realizó una inspección inicial del dataset para estudiar:
 - evolución temporal de ventas por consola
 - correlaciones entre ventas por región y ventas totales
 
+<img src="memoria/img/evo_totalsales_overtime.png" alt="Evolución de las ventas totales a lo largo del tiempo" width="700">
+
+<img src="memoria/img/mapa_ventas_region.png" alt="Distribución de ventas por región" width="700">
+
 ### 2. Preprocesado
 
 Entre las transformaciones realizadas destacan:
@@ -103,11 +109,13 @@ Posteriormente se aplicó:
 
 El mejor modelo fue **XGBoost**, que obtuvo el mejor equilibrio entre métricas durante la fase comparativa.
 
-### Rendimiento destacado
+### Métricas en test
 
 - **F1-Score final en test:** `0.493`
 - **ROC AUC en test:** `0.868`
 - **Average Precision (PR):** `~0.48`
+
+<img src="memoria/img/xgboost_final_roc.png" alt="Curva ROC del modelo final" width="600">
 
 ### Hallazgos relevantes
 
@@ -115,6 +123,8 @@ El mejor modelo fue **XGBoost**, que obtuvo el mejor equilibrio entre métricas 
 - `publisher_simple`, `genre` y `console` también tuvieron un peso importante.
 - Norteamérica y Europa aparecen como los mercados más relevantes en ventas globales.
 - El problema presenta un **fuerte desbalance de clases**, ya que solo alrededor del **8%** de los videojuegos analizados alcanzan el umbral de éxito.
+
+<img src="memoria/img/importancia_por_permutacion.png" alt="Importancia de variables por permutación" width="700">
 
 ## Limitaciones
 
@@ -127,3 +137,18 @@ Este proyecto presenta algunas limitaciones importantes:
   - popularidad en redes sociales
   - reputación previa de la franquicia
   - contexto competitivo del lanzamiento
+
+## Estructura del repositorio
+
+- `anexos/` — notebook con todo el código del análisis
+- `data/` — dataset original
+- `memoria/` — memoria del proyecto (RMarkdown y HTML) e imágenes
+
+## Cómo reproducirlo
+
+1. Clona el repositorio. El dataset ya está incluido en `data/`.
+2. Instala las dependencias:
+```
+   pip install pandas numpy matplotlib seaborn plotly scikit-learn xgboost
+```
+3. Abre `anexos/Ivan_Araque_Lopez_Analisis_Videojuegos.ipynb` y ejecútalo de arriba abajo.
